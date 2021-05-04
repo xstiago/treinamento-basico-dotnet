@@ -1,10 +1,10 @@
 ﻿namespace TreinamentoWeb.Core.Entities
 {
-    public class Customer : BaseEntity
+    public abstract class Customer : BaseEntity
     {
-        public Customer() { }
+        protected Customer() { }
 
-        public Customer(string name, string address, string email, bool active) : base(active)
+        protected Customer(string name, string address, string email, bool active) : base(active)
         {
             Name = name;
             Address = address;
