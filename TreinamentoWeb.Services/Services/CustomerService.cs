@@ -13,7 +13,7 @@ namespace TreinamentoWeb.Services.Services
         public CustomerService(CustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
-        }
+        } 
 
         public async Task<int> SaveCustomer(Customer customer)
         {
