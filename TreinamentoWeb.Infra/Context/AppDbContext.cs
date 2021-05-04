@@ -13,7 +13,7 @@ namespace TreinamentoWeb.Infra.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<NaturalPerson>().ToTable("Customer");
+            modelBuilder.Entity<NaturalPerson>().ToTable("NaturalPerson");
             modelBuilder.Entity<NaturalPerson>().HasIndex(h => h.Name).IsUnique();
         }
     }
