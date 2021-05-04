@@ -25,10 +25,17 @@ namespace TreinamentoWeb.Services.Services
             => _customerRepository.GetCustomers();
 
         #region Private Methods
-        private void ValidateCustomer(Customer customer)
+        private void ValidateCustomer(NaturalPerson customer)
         {
-            if (string.IsNullOrWhiteSpace(customer.Name) || string.IsNullOrWhiteSpace(customer.Email) || string.IsNullOrWhiteSpace(customer.Address))
+            var hasCpf = string.IsNullOrWhiteSpace(customer.CPF);
+            var hasName = string.IsNullOrWhiteSpace(customer.Name);
+            var hasEmail = string.IsNullOrWhiteSpace(customer.Email);
+            var hasAddress = string.IsNullOrWhiteSpace(customer.Address);
+           
+            if (hasCpf || hasName || hasEmail || hasAddress)
                 throw new ArgumentException("Cliente inválido");
+
+
         }
         #endregion
     }

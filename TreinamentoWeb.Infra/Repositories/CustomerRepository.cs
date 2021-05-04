@@ -15,13 +15,13 @@ namespace TreinamentoWeb.Infra.Repositories
             _context = context;
         }
 
-        public async Task<int> SaveCustomer(Customer customer)
+        public async Task<int> SaveCustomer(NaturalPerson customer)
         {
             _context.Customers.Add(customer);
             return await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<Customer> GetCustomers()
+        public IEnumerable<NaturalPerson> GetCustomers()
             => _context.Customers.Where(w => w.Active);
     }
 }
