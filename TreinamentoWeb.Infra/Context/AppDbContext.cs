@@ -9,12 +9,16 @@ namespace TreinamentoWeb.Infra.Context
         {
         }
 
-        public DbSet<NaturalPerson> Customers { get; set; }
+        public DbSet<NaturalPerson> NaturalPerson { get; set; }
+        public DbSet<LegalPerson> LegalPerson { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<NaturalPerson>().ToTable("NaturalPerson");
-            modelBuilder.Entity<NaturalPerson>().HasIndex(h => h.Name).IsUnique();
+            modelBuilder.Entity<NaturalPerson>().HasIndex(h => h.CPF).IsUnique();
+
+            modelBuilder.Entity<LegalPerson>().ToTable("LegalPerson");
+            modelBuilder.Entity<LegalPerson>().HasIndex(h => h.CNPJ).IsUnique();
         }
     }
 }

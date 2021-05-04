@@ -8,9 +8,9 @@ namespace TreinamentoWeb.Services.Services
 {
     public class LegalPersonService
     {
-        private readonly CustomerRepository _customerRepository;
+        private readonly LegalPersonRepository _customerRepository;
 
-        public LegalPersonService(CustomerRepository customerRepository)
+        public LegalPersonService(LegalPersonRepository customerRepository)
         {
             _customerRepository = customerRepository;
         } 
