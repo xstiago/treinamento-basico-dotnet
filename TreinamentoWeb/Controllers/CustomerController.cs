@@ -9,23 +9,23 @@ namespace TreinamentoWeb.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class NaturalPersonController : ControllerBase
     {
-        private readonly CustomerService _customerService;
+        private readonly NaturalPersonService _customerService;
 
-        public CustomerController(CustomerService customerService)
+        public NaturalPersonController(NaturalPersonService customerService)
         {
             _customerService = customerService;
         }
 
         [HttpGet]
-        public IEnumerable<Customer> GetAll()
+        public IEnumerable<NaturalPerson> GetAll()
         {
             return _customerService.GetCustomers();
         }
 
         [HttpPost]
-        public async Task<string> Post([FromBody] Customer customer)
+        public async Task<string> Post([FromBody] NaturalPerson customer)
         {
             int countCustomerInserted = await _customerService.SaveCustomer(customer);
             if (countCustomerInserted == 1)

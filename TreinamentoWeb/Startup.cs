@@ -34,7 +34,7 @@ namespace TreinamentoWeb.Api
             services.AddDbContext<AppDbContext>(options => { options.UseSqlite(connectionString); });
 
             services.AddScoped<CustomerRepository>();
-            services.AddScoped<CustomerService>();
+            services.AddScoped<NaturalPersonService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext context)

@@ -8,10 +8,11 @@ namespace TreinamentoWeb.Core.Entities
 {
     public class LegalPerson : Customer
     {
-        public LegalPerson(string name, string address, string email, bool active) : base(name, address, email, active)
+        public LegalPerson(string cnpj, string name, string address, string email, bool active) : base(name, address, email, active)
         {
+            CNPJ = cnpj;
         }
 
-        public int CNPJ { get; set; }
+        public string CNPJ { get; set; }
     }
 }

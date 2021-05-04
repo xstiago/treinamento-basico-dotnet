@@ -6,22 +6,22 @@ using TreinamentoWeb.Infra.Repositories;
 
 namespace TreinamentoWeb.Services.Services
 {
-    public class CustomerService
+    public class NaturalPersonService
     {
         private readonly CustomerRepository _customerRepository;
 
-        public CustomerService(CustomerRepository customerRepository)
+        public NaturalPersonService(CustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
         } 
 
-        public async Task<int> SaveCustomer(Customer customer)
+        public async Task<int> SaveCustomer(NaturalPerson customer)
         {
             ValidateCustomer(customer);
             return await _customerRepository.SaveCustomer(customer);
         }
 
-        public IEnumerable<Customer> GetCustomers()
+        public IEnumerable<NaturalPerson> GetCustomers()
             => _customerRepository.GetCustomers();
 
         #region Private Methods
