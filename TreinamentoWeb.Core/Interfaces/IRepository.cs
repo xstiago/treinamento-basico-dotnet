@@ -9,8 +9,8 @@ namespace TreinamentoWeb.Core.Interfaces
 {
     public interface IRepository<TEntity> where TEntity:BaseEntity
     {
-        IEnumerable<TEntity> GetCustomers();
+        IEnumerable<TEntity> Get();
 
-        Task<int> SaveCustomer(TEntity customer);
+        Task<int> Save(TEntity entity);
     }
 }

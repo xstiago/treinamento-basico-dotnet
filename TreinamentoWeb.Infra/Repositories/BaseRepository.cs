@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
+using TreinamentoWeb.Core.Interfaces;
 using TreinamentoWeb.Infra.Context;
 
 namespace TreinamentoWeb.Infra.Repositories
 {
-    public abstract class BaseRepository<TEntity>
+    public abstract class BaseRepository<TEntity> : IRepository<TEntity>
         where TEntity : BaseEntity
     {
         protected readonly AppDbContext _context;
@@ -21,13 +22,13 @@ namespace TreinamentoWeb.Infra.Repositories
 
         protected abstract DbSet<TEntity> GetContext();
 
-        public async Task<int> SaveCustomer(TEntity customer)
+        public async Task<int> Save(TEntity entity)
         {
-            GetContext().Add(customer);
+            GetContext().Add(entity);
             return await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<TEntity> GetCustomers()
+        public IEnumerable<TEntity> Get()
             => GetContext().Where(w => w.Active);
     }
 }
