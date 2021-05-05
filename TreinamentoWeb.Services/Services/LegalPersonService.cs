@@ -2,41 +2,27 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
+using TreinamentoWeb.Core.Interfaces;
 using TreinamentoWeb.Infra.Repositories;
 
 namespace TreinamentoWeb.Services.Services
 {
-    public class LegalPersonService
+    public class LegalPersonService : BaseService<LegalPerson>
     {
-        private readonly LegalPersonRepository _customerRepository;
-
-        public LegalPersonService(LegalPersonRepository customerRepository)
+        public LegalPersonService(IRepository<LegalPerson> repository) : base(repository)
         {
-            _customerRepository = customerRepository;
-        } 
-
-        public async Task<int> SaveCustomer(LegalPerson customer)
-        {
-            ValidateCustomer(customer);
-            return await _customerRepository.SaveCustomer(customer);
         }
 
-        public IEnumerable<LegalPerson> GetCustomers()
-            => _customerRepository.GetCustomers();
-
-        #region Private Methods
-        private void ValidateCustomer(LegalPerson customer)
+        protected override void ValidateEntity(LegalPerson entity)
         {
-            var hasCnpj = string.IsNullOrWhiteSpace(customer.CNPJ);
-            var hasName = string.IsNullOrWhiteSpace(customer.Name);
-            var hasEmail = string.IsNullOrWhiteSpace(customer.Email);
-            var hasAddress = string.IsNullOrWhiteSpace(customer.Address);
-           
+            var hasCnpj = string.IsNullOrWhiteSpace(entity.CNPJ);
+            var hasName = string.IsNullOrWhiteSpace(entity.Name);
+            var hasEmail = string.IsNullOrWhiteSpace(entity.Email);
+            var hasAddress = string.IsNullOrWhiteSpace(entity.Address);
+
             if (hasCnpj || hasName || hasEmail || hasAddress)
                 throw new ArgumentException("Cliente inválido");
-
-
+            throw new NotImplementedException();
         }
-        #endregion
     }
 }

@@ -2,41 +2,26 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
+using TreinamentoWeb.Core.Interfaces;
 using TreinamentoWeb.Infra.Repositories;
 
 namespace TreinamentoWeb.Services.Services
 {
-    public class NaturalPersonService
+    public class NaturalPersonService : BaseService<NaturalPerson>
     {
-        private readonly NaturalPersonRepository _customerRepository;
-
-        public NaturalPersonService(NaturalPersonRepository customerRepository)
+        public NaturalPersonService(IRepository<NaturalPerson> repository) : base(repository)
         {
-            _customerRepository = customerRepository;
-        } 
-
-        public async Task<int> SaveCustomer(NaturalPerson customer)
-        {
-            ValidateCustomer(customer);
-            return await _customerRepository.SaveCustomer(customer);
         }
 
-        public IEnumerable<NaturalPerson> GetCustomers()
-            => _customerRepository.GetCustomers();
-
-        #region Private Methods
-        private void ValidateCustomer(NaturalPerson customer)
+        protected override void ValidateEntity(NaturalPerson entity)
         {
-            var hasCpf = string.IsNullOrWhiteSpace(customer.CPF);
-            var hasName = string.IsNullOrWhiteSpace(customer.Name);
-            var hasEmail = string.IsNullOrWhiteSpace(customer.Email);
-            var hasAddress = string.IsNullOrWhiteSpace(customer.Address);
-           
+            var hasCpf = string.IsNullOrWhiteSpace(entity.CPF);
+            var hasName = string.IsNullOrWhiteSpace(entity.Name);
+            var hasEmail = string.IsNullOrWhiteSpace(entity.Email);
+            var hasAddress = string.IsNullOrWhiteSpace(entity.Address);
+
             if (hasCpf || hasName || hasEmail || hasAddress)
                 throw new ArgumentException("Cliente inválido");
-
-
         }
-        #endregion
     }
 }
