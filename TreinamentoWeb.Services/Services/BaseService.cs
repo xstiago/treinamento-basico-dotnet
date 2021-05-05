@@ -8,8 +8,8 @@ using TreinamentoWeb.Core.Interfaces;
 
 namespace TreinamentoWeb.Services.Services
 {
-    public abstract class BaseService<TEntity> 
-        where TEntity : BaseEntity
+    public abstract class BaseService<TEntity> : IService<TEntity>
+        where TEntity : BaseEntity        
     {
         private readonly IRepository<TEntity> repository;
 

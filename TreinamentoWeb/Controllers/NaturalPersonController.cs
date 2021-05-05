@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
+using TreinamentoWeb.Core.Interfaces;
 using TreinamentoWeb.Services.Services;
 
 namespace TreinamentoWeb.Api.Controllers
@@ -11,9 +12,9 @@ namespace TreinamentoWeb.Api.Controllers
     [ApiController]
     public class NaturalPersonController : ControllerBase
     {
-        private readonly NaturalPersonService _customerService;
+        private readonly IService<NaturalPerson> _customerService;
 
-        public NaturalPersonController(NaturalPersonService customerService)
+        public NaturalPersonController(IService<NaturalPerson> customerService)
         {
             _customerService = customerService;
         }
@@ -21,13 +22,13 @@ namespace TreinamentoWeb.Api.Controllers
         [HttpGet]
         public IEnumerable<NaturalPerson> GetAll()
         {
-            return _customerService.GetCustomers();
+            return _customerService.Get();
         }
 
         [HttpPost]
         public async Task<string> Post([FromBody] NaturalPerson customer)
         {
-            int countCustomerInserted = await _customerService.SaveCustomer(customer);
+            int countCustomerInserted = await _customerService.Save(customer);
             if (countCustomerInserted == 1)
                 return "Cliente inserido com sucesso!";
             else

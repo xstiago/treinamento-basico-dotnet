@@ -9,6 +9,8 @@ using TreinamentoWeb.Infra.Context;
 using TreinamentoWeb.Infra.Repositories;
 using TreinamentoWeb.Services.Services;
 using Microsoft.Data.Sqlite;
+using TreinamentoWeb.Core.Interfaces;
+using TreinamentoWeb.Core.Entities;
 
 namespace TreinamentoWeb.Api
 {
@@ -33,10 +35,10 @@ namespace TreinamentoWeb.Api
             new SqliteConnection(connectionString).Open();
             services.AddDbContext<AppDbContext>(options => { options.UseSqlite(connectionString); });
 
-            services.AddScoped<LegalPersonRepository>();
-            services.AddScoped<NaturalPersonRepository>();
-            services.AddScoped<LegalPersonService>();
-            services.AddScoped<NaturalPersonService>();
+            services.AddScoped<IRepository<LegalPerson>, LegalPersonRepository>();
+            services.AddScoped<IRepository<NaturalPerson>, NaturalPersonRepository>();
+            services.AddScoped<IService<LegalPerson>, LegalPersonService>();
+            services.AddScoped<IService<NaturalPerson>, NaturalPersonService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext context)
