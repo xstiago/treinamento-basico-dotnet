@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
@@ -6,22 +7,15 @@ using TreinamentoWeb.Infra.Context;
 
 namespace TreinamentoWeb.Infra.Repositories
 {
-    public class LegalPersonRepository
+    public class LegalPersonRepository : BaseRepository<LegalPerson>
     {
-        private readonly AppDbContext _context;
-
-        public LegalPersonRepository(AppDbContext context)
+        public LegalPersonRepository(AppDbContext context) : base(context)
         {
-            _context = context;
         }
 
-        public async Task<int> SaveCustomer(LegalPerson customer)
+        protected override DbSet<LegalPerson> GetContext()
         {
-            _context.LegalPerson.Add(customer);
-            return await _context.SaveChangesAsync();
+            return _context.LegalPerson;
         }
-
-        public IEnumerable<LegalPerson> GetCustomers()
-            => _context.LegalPerson.Where(w => w.Active);
     }
 }
