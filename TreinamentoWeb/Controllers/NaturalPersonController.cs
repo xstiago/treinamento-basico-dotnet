@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
@@ -28,11 +29,11 @@ namespace TreinamentoWeb.Api.Controllers
         [HttpPost]
         public async Task<string> Post([FromBody] NaturalPerson customer)
         {
-            int countCustomerInserted = await _customerService.Save(customer);
-            if (countCustomerInserted == 1)
+            (int changedRecords, IEnumerable<string> errors) = await _customerService.Save(customer);
+            if (changedRecords == 1)
                 return "Cliente inserido com sucesso!";
             else
-                return "Ocorreu um erro ao inserir o cliente";
+                return $"Ocorreu um erro ao inserir o cliente {Environment.NewLine} {string.Join(Environment.NewLine, errors)}";
         }
     }
 }

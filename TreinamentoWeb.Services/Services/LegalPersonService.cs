@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
@@ -9,20 +10,8 @@ namespace TreinamentoWeb.Services.Services
 {
     public class LegalPersonService : BaseService<LegalPerson>
     {
-        public LegalPersonService(IRepository<LegalPerson> repository) : base(repository)
+        public LegalPersonService(IRepository<LegalPerson> repository, IValidator<LegalPerson> validator) : base(repository, validator)
         {
-        }
-
-        protected override void ValidateEntity(LegalPerson entity)
-        {
-            var hasCnpj = string.IsNullOrWhiteSpace(entity.CNPJ);
-            var hasName = string.IsNullOrWhiteSpace(entity.Name);
-            var hasEmail = string.IsNullOrWhiteSpace(entity.Email);
-            var hasAddress = string.IsNullOrWhiteSpace(entity.Address);
-
-            if (hasCnpj || hasName || hasEmail || hasAddress)
-                throw new ArgumentException("Cliente inválido");
-            throw new NotImplementedException();
         }
     }
 }

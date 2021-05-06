@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
@@ -28,11 +29,11 @@ namespace TreinamentoWeb.Api.Controllers
         [HttpPost]
         public async Task<string> Post([FromBody] Product product)
         {
-            int countproductInserted = await _productService.Save(product);
-            if (countproductInserted == 1)
+            (int changedRecords, IEnumerable<string> errors) = await _productService.Save(product);
+            if (changedRecords == 1)
                 return "Produto inserido com sucesso!";
             else
-                return "Ocorreu um erro ao inserir o produto";
+                return $"Ocorreu um erro ao inserir o produto {Environment.NewLine} {string.Join(Environment.NewLine, errors)}";
         }
     }
 }

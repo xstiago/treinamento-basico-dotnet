@@ -11,6 +11,8 @@ using TreinamentoWeb.Services.Services;
 using Microsoft.Data.Sqlite;
 using TreinamentoWeb.Core.Interfaces;
 using TreinamentoWeb.Core.Entities;
+using FluentValidation;
+using TreinamentoWeb.Services.Validators;
 
 namespace TreinamentoWeb.Api
 {
@@ -34,6 +36,10 @@ namespace TreinamentoWeb.Api
             var connectionString = "DataSource=treinamento;mode=memory;cache=shared";
             new SqliteConnection(connectionString).Open();
             services.AddDbContext<AppDbContext>(options => { options.UseSqlite(connectionString); });
+
+            services.AddScoped<IValidator<Product>, ProductValidator>();
+            services.AddScoped<IValidator<LegalPerson>, LegalPersonValidator>();
+            services.AddScoped<IValidator<NaturalPerson>, NaturalPersonValidator>();            
 
             services.AddScoped<IRepository<LegalPerson>, LegalPersonRepository>();
             services.AddScoped<IRepository<NaturalPerson>, NaturalPersonRepository>();
