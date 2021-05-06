@@ -8,9 +8,9 @@ using TreinamentoWeb.Core.Interfaces;
 
 namespace TreinamentoWeb.Services.Services
 {
-    public class ProdutoService :  BaseService<Product>
+    public class ProductService :  BaseService<Product>
     {
-        public ProdutoService(IRepository<Product> repository) : base(repository)
+        public ProductService(IRepository<Product> repository) : base(repository)
         {
         }
 
@@ -19,7 +19,7 @@ namespace TreinamentoWeb.Services.Services
             var hasDescription = string.IsNullOrWhiteSpace(entity.Description);
             var hasKind = string.IsNullOrWhiteSpace(entity.Kind);
             var hasManufacturer = string.IsNullOrWhiteSpace(entity.Manufacturer);
-            var hasPrice = entity.Price > 0;
+            var hasPrice = entity.Price <= 0;
 
             if (hasDescription || hasKind || hasManufacturer || hasPrice)
                 throw new ArgumentException("Produto inválido");

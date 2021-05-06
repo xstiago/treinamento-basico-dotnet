@@ -37,8 +37,10 @@ namespace TreinamentoWeb.Api
 
             services.AddScoped<IRepository<LegalPerson>, LegalPersonRepository>();
             services.AddScoped<IRepository<NaturalPerson>, NaturalPersonRepository>();
+            services.AddScoped<IRepository<Product>, ProductRepository>();
             services.AddScoped<IService<LegalPerson>, LegalPersonService>();
             services.AddScoped<IService<NaturalPerson>, NaturalPersonService>();
+            services.AddScoped<IService<Product>, ProductService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext context)
