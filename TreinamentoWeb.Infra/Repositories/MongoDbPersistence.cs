@@ -15,6 +15,14 @@ namespace TreinamentoWeb.Infra.Repositories
                 map.MapIdMember(x => x.CNPJ);
                 map.MapMember(x => x.CNPJ).SetIsRequired(true);
             });
+
+            BsonClassMap.RegisterClassMap<NaturalPerson>(map =>
+            {
+                map.AutoMap();
+                map.SetIgnoreExtraElements(true);
+                map.MapIdMember(x => x.CPF);
+                map.MapMember(x => x.CPF).SetIsRequired(true);
+            });
         }
 
         public static void Configure()

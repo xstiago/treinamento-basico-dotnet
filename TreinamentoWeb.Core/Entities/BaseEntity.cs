@@ -6,7 +6,7 @@ namespace TreinamentoWeb.Core.Entities
     {
         protected BaseEntity()
         {
-            ID = Guid.NewGuid();
+            //ID = Guid.NewGuid();
         }
 
         protected BaseEntity(bool active) : this()
@@ -14,7 +14,7 @@ namespace TreinamentoWeb.Core.Entities
             Active = active;
         }
 
-        public Guid ID { get; private set; }
+        //public Guid ID { get; private set; }
         public bool Active { get; set; }
 
         public void Activate()

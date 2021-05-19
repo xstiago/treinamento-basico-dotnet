@@ -26,7 +26,7 @@ namespace TreinamentoWeb.Infra.Context
             modelBuilder.Entity<Product>().HasIndex(h => h.Description).IsUnique();
             
             modelBuilder.Entity<Order>().ToTable("Order");
-            modelBuilder.Entity<Order>().HasIndex(h => h.ID).IsUnique();
+            //modelBuilder.Entity<Order>().HasIndex(h => h.ID).IsUnique();
         }
     }
 }

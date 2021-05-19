@@ -36,6 +36,8 @@ namespace TreinamentoWeb.Api
 
             services.AddScoped<IMongoContext, MongoContext>();
 
+            MongoDbPersistence.Configure();
+
             services.AddScoped<IValidator<Product>, ProductValidator>();
             services.AddScoped<IValidator<LegalPerson>, LegalPersonValidator>();
             services.AddScoped<IValidator<NaturalPerson>, NaturalPersonValidator>();            
