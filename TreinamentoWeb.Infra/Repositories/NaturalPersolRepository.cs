@@ -4,18 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
 using TreinamentoWeb.Infra.Context;
+using TreinamentoWeb.Infra.Interfaces;
 
 namespace TreinamentoWeb.Infra.Repositories
 {
     public class NaturalPersonRepository : BaseRepository<NaturalPerson>
     {
-        public NaturalPersonRepository(AppDbContext context) : base(context)
+        public NaturalPersonRepository(IMongoContext context) : base(context)
         {
         }
 
-        protected override DbSet<NaturalPerson> GetContext()
-        {
-            return _context.NaturalPerson;
-        }
     }
 }

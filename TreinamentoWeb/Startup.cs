@@ -13,6 +13,7 @@ using TreinamentoWeb.Core.Interfaces;
 using TreinamentoWeb.Core.Entities;
 using FluentValidation;
 using TreinamentoWeb.Services.Validators;
+using TreinamentoWeb.Infra.Interfaces;
 
 namespace TreinamentoWeb.Api
 {
@@ -33,9 +34,7 @@ namespace TreinamentoWeb.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TreinamentoWeb", Version = "v1" });
             });
 
-            var connectionString = "DataSource=treinamento;mode=memory;cache=shared";
-            new SqliteConnection(connectionString).Open();
-            services.AddDbContext<AppDbContext>(options => { options.UseSqlite(connectionString); });
+            services.AddScoped<IMongoContext, MongoContext>();
 
             services.AddScoped<IValidator<Product>, ProductValidator>();
             services.AddScoped<IValidator<LegalPerson>, LegalPersonValidator>();
@@ -49,9 +48,8 @@ namespace TreinamentoWeb.Api
             services.AddScoped<IService<Product>, ProductService>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext context)
-        {
-            context.Database.EnsureCreated();
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {            
 
             if (env.IsDevelopment())
             {

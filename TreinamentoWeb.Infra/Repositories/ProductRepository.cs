@@ -6,18 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
 using TreinamentoWeb.Infra.Context;
+using TreinamentoWeb.Infra.Interfaces;
 
 namespace TreinamentoWeb.Infra.Repositories
 {
     public class ProductRepository : BaseRepository<Product>
     {
-        public ProductRepository(AppDbContext context) : base(context)
+        public ProductRepository(IMongoContext context) : base(context)
         {
         }
 
-        protected override DbSet<Product> GetContext()
-        {
-            return _context.Product;
-        }
     }
 }

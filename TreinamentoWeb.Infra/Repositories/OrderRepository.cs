@@ -1,18 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TreinamentoWeb.Core.Entities;
 using TreinamentoWeb.Infra.Context;
+using TreinamentoWeb.Infra.Interfaces;
 
 namespace TreinamentoWeb.Infra.Repositories
 {
     public class OrderRepository : BaseRepository<Order>
     {
-        public OrderRepository(AppDbContext context) : base(context)
+        public OrderRepository(IMongoContext context) : base(context)
         {
         }
 
-        protected override DbSet<Order> GetContext()
-        {
-            return _context.Order;
-        }
     }
 }
