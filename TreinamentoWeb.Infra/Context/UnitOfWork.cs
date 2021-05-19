@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using TreinamentoWeb.Core.Interfaces;
+using TreinamentoWeb.Infra.Interfaces;
 
 namespace TreinamentoWeb.Infra.Context
 {
