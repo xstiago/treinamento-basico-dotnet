@@ -1,32 +1,40 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
 using TreinamentoWeb.Core.Interfaces;
 using TreinamentoWeb.Infra.Context;
+using TreinamentoWeb.Infra.Interfaces;
 
 namespace TreinamentoWeb.Infra.Repositories
 {
     public abstract class BaseRepository<TEntity> : IRepository<TEntity>
         where TEntity : BaseEntity
     {
-        protected readonly AppDbContext _context;
+        protected readonly IMongoContext _context;
+        private readonly IMongoCollection<TEntity> _collection;
 
-        protected BaseRepository(AppDbContext context)
+        protected BaseRepository(IMongoContext context)
         {
             _context = context;
+            _collection = _context.GetCollection<TEntity>(typeof(TEntity).Name);
         }
-
-        protected abstract DbSet<TEntity> GetContext();
 
         public async Task<int> Save(TEntity entity)
         {
-            GetContext().Add(entity);
+            await _collection.InsertOneAsync(entity);
             return await _context.SaveChangesAsync();
         }
 
         public IEnumerable<TEntity> Get()
-            => GetContext().Where(w => w.Active);
+        {
+            var filter = Builders<TEntity>.Filter.Empty;
+            var data = _collection.Find(filter);
+            return data.ToList();
+
+        }
+            
     }
 }
