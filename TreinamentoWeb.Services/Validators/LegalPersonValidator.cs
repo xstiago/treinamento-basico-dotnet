@@ -12,7 +12,9 @@ namespace TreinamentoWeb.Services.Validators
     public class LegalPersonValidator : CustomerValidator<LegalPerson>
     {
         public LegalPersonValidator()
-        {           
+        {
+            CascadeMode = CascadeMode.Stop;
+
             RuleFor(x => x.CNPJ)
                 .NotNull()
                 .NotEmpty()
