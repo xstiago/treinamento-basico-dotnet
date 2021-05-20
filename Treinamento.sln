@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreinamentoWeb.Api", "Trein
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{78B1ACE9-6AF3-45E5-979A-C880D175ADE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreinamentoWeb.Infra", "TreinamentoWeb.Infra\TreinamentoWeb.Infra.csproj", "{432790B8-067F-42B6-B41E-92551477F213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreinamentoWeb.Infra", "TreinamentoWeb.Infra\TreinamentoWeb.Infra.csproj", "{432790B8-067F-42B6-B41E-92551477F213}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreinamentoWeb.Core", "TreinamentoWeb.Core\TreinamentoWeb.Core.csproj", "{66CBFFBA-816E-40BD-BC49-A4B710EB72F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreinamentoWeb.Core", "TreinamentoWeb.Core\TreinamentoWeb.Core.csproj", "{66CBFFBA-816E-40BD-BC49-A4B710EB72F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreinamentoWeb.Services", "TreinamentoWeb.Services\TreinamentoWeb.Services.csproj", "{3D8E2D0A-1D19-49AC-8D67-3CF0965423FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreinamentoWeb.Services", "TreinamentoWeb.Services\TreinamentoWeb.Services.csproj", "{3D8E2D0A-1D19-49AC-8D67-3CF0965423FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreinamentoWeb.Unit.Tests", "TreinamentoWeb.Unit.Tests\TreinamentoWeb.Unit.Tests.csproj", "{84B22526-B45E-419E-BD66-1AE1DC8AAF5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{3D8E2D0A-1D19-49AC-8D67-3CF0965423FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D8E2D0A-1D19-49AC-8D67-3CF0965423FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D8E2D0A-1D19-49AC-8D67-3CF0965423FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84B22526-B45E-419E-BD66-1AE1DC8AAF5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84B22526-B45E-419E-BD66-1AE1DC8AAF5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84B22526-B45E-419E-BD66-1AE1DC8AAF5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84B22526-B45E-419E-BD66-1AE1DC8AAF5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{432790B8-067F-42B6-B41E-92551477F213} = {78B1ACE9-6AF3-45E5-979A-C880D175ADE0}
 		{66CBFFBA-816E-40BD-BC49-A4B710EB72F3} = {78B1ACE9-6AF3-45E5-979A-C880D175ADE0}
 		{3D8E2D0A-1D19-49AC-8D67-3CF0965423FD} = {78B1ACE9-6AF3-45E5-979A-C880D175ADE0}
+		{84B22526-B45E-419E-BD66-1AE1DC8AAF5D} = {78B1ACE9-6AF3-45E5-979A-C880D175ADE0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B55AE00B-8868-48F0-AA58-9D0037E333D1}
