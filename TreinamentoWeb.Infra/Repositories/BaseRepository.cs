@@ -1,11 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TreinamentoWeb.Core.Entities;
 using TreinamentoWeb.Core.Interfaces;
-using TreinamentoWeb.Infra.Context;
 using TreinamentoWeb.Infra.Interfaces;
 
 namespace TreinamentoWeb.Infra.Repositories
@@ -24,7 +22,7 @@ namespace TreinamentoWeb.Infra.Repositories
 
         public async Task<int> Save(TEntity entity)
         {
-            await _collection.InsertOneAsync(entity);
+            _context.AddCommand(() => _collection.InsertOneAsync(entity));
             return await _context.SaveChangesAsync();
         }
 
