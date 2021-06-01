@@ -1,9 +1,11 @@
 ﻿using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
+using System.Diagnostics.CodeAnalysis;
 using TreinamentoWeb.Core.Entities;
 
 namespace TreinamentoWeb.Infra.Repositories
 {
+    [ExcludeFromCodeCoverage]
     public static class MongoDbPersistence
     {
         private static void ConfigureMap()

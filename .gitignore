@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/TreinamentoWeb.Unit.Tests/coverage.cobertura.xml
+/TreinamentoWeb.Unit.Tests/coverage.opencover.xml
+/TreinamentoWeb.Unit.Tests/coveragereport

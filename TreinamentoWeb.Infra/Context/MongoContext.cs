@@ -2,12 +2,14 @@
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using TreinamentoWeb.Infra.Interfaces;
 
 namespace TreinamentoWeb.Infra.Context
 {
+    [ExcludeFromCodeCoverage]
     public class MongoContext : IMongoContext
     {
         private readonly ICollection<Func<Task>> _commands;

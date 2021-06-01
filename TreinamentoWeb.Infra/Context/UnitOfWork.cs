@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using TreinamentoWeb.Core.Interfaces;
 using TreinamentoWeb.Infra.Interfaces;
 
 namespace TreinamentoWeb.Infra.Context
 {
+    [ExcludeFromCodeCoverage]
     public class UnitOfWork : IUnitOfWork
     {
         private readonly IMongoContext _context;

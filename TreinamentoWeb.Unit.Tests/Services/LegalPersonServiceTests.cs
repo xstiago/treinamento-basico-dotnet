@@ -9,7 +9,7 @@ using Xunit;
 
 namespace TreinamentoWeb.Unit.Tests.Services
 {
-    public class NatualPersonServiceTests
+    public class LegalPersonServiceTests
     {
         [Fact]
         public async Task ShouldSaveDataWhenValidationWorks()
@@ -18,22 +18,22 @@ namespace TreinamentoWeb.Unit.Tests.Services
 
             const int expectedChangedRecords = 1;
 
-            var payload = new NaturalPerson
+            var payload = new LegalPerson
             {
                 Active = true,
                 Address = "Rua XXX",
-                CPF = "54822590054",
+                CNPJ = "08671065000170",
                 Email = "fulano@terra.com.br",
                 Name = "Fulano da Silva"
             };
 
-            var repositoryMock = new Mock<IRepository<NaturalPerson>>();
+            var repositoryMock = new Mock<IRepository<LegalPerson>>();
             repositoryMock.Setup(o => o.Save(payload))
                 .ReturnsAsync(1);
 
-            var validator = new NaturalPersonValidator();
+            var validator = new LegalPersonValidator();
 
-            var service = new NaturalPersonService(repositoryMock.Object, validator);
+            var service = new LegalPersonService(repositoryMock.Object, validator);
                       
 
 
@@ -60,20 +60,20 @@ namespace TreinamentoWeb.Unit.Tests.Services
 
             const int expectedChangedRecords = -1;
 
-            var payload = new NaturalPerson
+            var payload = new LegalPerson
             {
                 Active = true,
                 Address = "Rua XXX",
-                CPF = "54822590053",
+                CNPJ = "08671065000171",
                 Email = "fulano@terra.com.br",
                 Name = "Fulano da Silva"
             };
 
-            var repositoryMock = new Mock<IRepository<NaturalPerson>>();
+            var repositoryMock = new Mock<IRepository<LegalPerson>>();
 
-            var validator = new NaturalPersonValidator();
+            var validator = new LegalPersonValidator();
 
-            var service = new NaturalPersonService(repositoryMock.Object, validator);
+            var service = new LegalPersonService(repositoryMock.Object, validator);
 
             #endregion Arrange
 
