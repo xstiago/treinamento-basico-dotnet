@@ -40,14 +40,17 @@ namespace TreinamentoWeb.Api
 
             services.AddScoped<IValidator<Product>, ProductValidator>();
             services.AddScoped<IValidator<LegalPerson>, LegalPersonValidator>();
-            services.AddScoped<IValidator<NaturalPerson>, NaturalPersonValidator>();            
+            services.AddScoped<IValidator<NaturalPerson>, NaturalPersonValidator>();
+            services.AddScoped<IValidator<Order>, OrderValidator>();
 
             services.AddScoped<IRepository<LegalPerson>, LegalPersonRepository>();
             services.AddScoped<IRepository<NaturalPerson>, NaturalPersonRepository>();
             services.AddScoped<IRepository<Product>, ProductRepository>();
+            services.AddScoped<IRepository<Order>, OrderRepository>();
             services.AddScoped<IService<LegalPerson>, LegalPersonService>();
             services.AddScoped<IService<NaturalPerson>, NaturalPersonService>();
             services.AddScoped<IService<Product>, ProductService>();
+            services.AddScoped<IService<Order>, OrderService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

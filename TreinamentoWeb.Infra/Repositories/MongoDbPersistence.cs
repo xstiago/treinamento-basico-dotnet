@@ -25,6 +25,18 @@ namespace TreinamentoWeb.Infra.Repositories
                 map.MapIdMember(x => x.CPF);
                 map.MapMember(x => x.CPF).SetIsRequired(true);
             });
+
+            BsonClassMapper.Instance.Register<Product>(map =>
+            {
+                map.AutoMap();
+                map.SetIgnoreExtraElements(true);
+            });
+
+            BsonClassMapper.Instance.Register<Order>(map =>
+            {
+                map.AutoMap();
+                map.SetIgnoreExtraElements(true);
+            });
         }
 
         public static void Configure()
