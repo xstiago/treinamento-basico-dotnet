@@ -10,7 +10,7 @@ namespace TreinamentoWeb.Infra.Repositories
     {
         private static void ConfigureMap()
         {
-            BsonClassMap.RegisterClassMap<LegalPerson>(map =>
+            BsonClassMapper.Instance.Register<LegalPerson>(map =>
             {
                 map.AutoMap();
                 map.SetIgnoreExtraElements(true);
@@ -18,7 +18,7 @@ namespace TreinamentoWeb.Infra.Repositories
                 map.MapMember(x => x.CNPJ).SetIsRequired(true);
             });
 
-            BsonClassMap.RegisterClassMap<NaturalPerson>(map =>
+            BsonClassMapper.Instance.Register<NaturalPerson>(map =>
             {
                 map.AutoMap();
                 map.SetIgnoreExtraElements(true);
