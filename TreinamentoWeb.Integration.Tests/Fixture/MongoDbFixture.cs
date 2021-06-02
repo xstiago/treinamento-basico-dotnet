@@ -56,5 +56,12 @@ namespace TreinamentoWeb.Integration.Tests.Fixture
 
             await repository.Save(entity);
         }
+
+        public async Task AddSync(Product entity)
+        {
+            var repository = new ProductRepository(DbContext);
+
+            await repository.Save(entity);
+        }
     }
 }

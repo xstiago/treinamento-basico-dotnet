@@ -14,12 +14,12 @@ using Xunit;
 namespace TreinamentoWeb.Integration.Tests.Api
 {
     [Collection("Startup")]
-    public class LegalPersonControllerTests : IClassFixture<WebApplicationFactory<Startup>>, IDisposable
+    public class ProductControllerTests : IClassFixture<WebApplicationFactory<Startup>>, IDisposable
     {
         private readonly WebApplicationFactory<Startup> _factory;
         private readonly MongoDbFixture _dbFixture;
 
-        public LegalPersonControllerTests(WebApplicationFactory<Startup> factory)
+        public ProductControllerTests(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
             _dbFixture = new MongoDbFixture();
@@ -39,28 +39,28 @@ namespace TreinamentoWeb.Integration.Tests.Api
             }
         }
 
-
         [Fact]
-        public async Task Should_Save_Natural_Person_On_Repository_When_Receive_Valid_Data()
+        public async Task Should_Save_Product_On_Repository_When_Receive_Valid_Data()
         {
             #region Arrange
 
             var client = _factory.CreateClient();
 
-            var payload = new LegalPerson
+            var payload = new Product
             {
                 Active = true,
-                Address = "Rua XXX",
-                CNPJ = "96764618000105",
-                Email = "fulano@terra.com.br",
-                Name = "Fulano da Silva"
+                Description = "Teste",
+                Kind = "Teste_Kind",
+                Manufacturer = "Teste_Manufacturer",
+                Price = 1
+
             };
 
             #endregion Arrange
 
             #region Act
 
-            var responseMessage = await client.PostAsJsonAsync("api/LegalPerson/", payload);
+            var responseMessage = await client.PostAsJsonAsync("api/Product/", payload);
 
             #endregion Act
 
@@ -70,32 +70,32 @@ namespace TreinamentoWeb.Integration.Tests.Api
 
             var result = await responseMessage.Content.ReadAsStringAsync();
 
-            Assert.Equal("Cliente inserido com sucesso!", result);
+            Assert.Equal("Produto inserido com sucesso!", result);
 
             #endregion Assert
         }
 
         [Fact]
-        public async Task Should_Not_Save_Natural_Person_On_Repository_When_Receive_Invalid_Data()
+        public async Task Should_Not_Save_Product_On_Repository_When_Receive_Invalid_Data()
         {
             #region Arrange
 
             var client = _factory.CreateClient();
 
-            var payload = new LegalPerson
+            var payload = new Product
             {
                 Active = true,
-                Address = "Rua XXX",
-                CNPJ = "96764618000109",
-                Email = "fulano@terra.com.br",
-                Name = "Fulano da Silva"
+                Description = "Teste",
+                Kind = "Teste_Kind",
+                Manufacturer = "Teste_Manufacturer",
+                Price = 1
             };
 
             #endregion Arrange
 
             #region Act
 
-            var responseMessage = await client.PostAsJsonAsync("api/LegalPerson/", payload);
+            var responseMessage = await client.PostAsJsonAsync("api/Product/", payload);
 
             #endregion Act
 
@@ -111,19 +111,19 @@ namespace TreinamentoWeb.Integration.Tests.Api
         }
 
         [Fact]
-        public async Task Should_Get_Natural_Person_From_Repository_When_There_Are_Data()
+        public async Task Should_Get_Product_From_Repository_When_There_Are_Data()
         {
             #region Arrange
 
             var client = _factory.CreateClient();
 
-            var payload = new LegalPerson
+            var payload = new Product
             {
                 Active = true,
-                Address = "Rua XXX",
-                CNPJ = "96874672000103",
-                Email = "fulano@terra.com.br",
-                Name = "Fulano da Silva"
+                Description = "Teste",
+                Kind = "Teste_Kind",
+                Manufacturer = "Teste_Manufacturer",
+                Price = 1
             };
 
             await _dbFixture.AddSync(payload);
@@ -132,7 +132,7 @@ namespace TreinamentoWeb.Integration.Tests.Api
 
             #region Act
 
-            var responseMessage = await client.GetAsync("api/LegalPerson/");
+            var responseMessage = await client.GetAsync("api/Product/");
 
             #endregion Act
 
@@ -142,16 +142,17 @@ namespace TreinamentoWeb.Integration.Tests.Api
 
             var jsonResult = await responseMessage.Content.ReadAsStringAsync();
 
-            var legalPersonList = JsonSerializer.Deserialize<IEnumerable<LegalPerson>>(jsonResult, new JsonSerializerOptions
+            var ProductList = JsonSerializer.Deserialize<IEnumerable<Product>>(jsonResult, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
 
-            Assert.NotEmpty(legalPersonList);
-            Assert.Contains(legalPersonList, o => o.CNPJ == payload.CNPJ);
+            Assert.NotEmpty(ProductList);
+            Assert.Contains(ProductList, o => o.Description == payload.Description);
 
             #endregion Assert
         }
+
 
     }
 }

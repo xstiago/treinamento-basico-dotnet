@@ -75,6 +75,41 @@ namespace TreinamentoWeb.Integration.Tests.Api
         }
 
         [Fact]
+        public async Task Should_Not_Save_Natural_Person_On_Repository_When_Receive_Invalid_Data()
+        {
+            #region Arrange
+
+            var client = _factory.CreateClient();
+
+            var payload = new NaturalPerson
+            {
+                Active = true,
+                Address = "Rua XXX",
+                CPF = "54822590999",
+                Email = "fulano@terra.com.br",
+                Name = "Fulano da Silva"
+            };
+
+            #endregion Arrange
+
+            #region Act
+
+            var responseMessage = await client.PostAsJsonAsync("api/NaturalPerson/", payload);
+
+            #endregion Act
+
+            #region Assert
+
+            responseMessage.EnsureSuccessStatusCode();
+
+            var result = await responseMessage.Content.ReadAsStringAsync();
+
+            Assert.NotEqual("Cliente inserido com sucesso!", result);
+
+            #endregion Assert
+        }
+
+        [Fact]
         public async Task Should_Get_Natural_Person_From_Repository_When_There_Are_Data()
         {
             #region Arrange
