@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TreinamentoWeb.Api;
@@ -14,12 +14,12 @@ using Xunit;
 namespace TreinamentoWeb.Integration.Tests.Api
 {
     [Collection("Startup")]
-    public class NaturalPersonControllerTests : IClassFixture<WebApplicationFactory<Startup>>, IDisposable
+    public class LegalPersonControllerTests : IClassFixture<WebApplicationFactory<Startup>>, IDisposable
     {
         private readonly WebApplicationFactory<Startup> _factory;
         private readonly MongoDbFixture _dbFixture;
 
-        public NaturalPersonControllerTests(WebApplicationFactory<Startup> factory)
+        public LegalPersonControllerTests(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
             _dbFixture = new MongoDbFixture();
@@ -31,13 +31,14 @@ namespace TreinamentoWeb.Integration.Tests.Api
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) 
+        protected virtual void Dispose(bool disposing)
         {
             if (disposing)
             {
                 _dbFixture?.Dispose();
             }
         }
+
 
         [Fact]
         public async Task Should_Save_Natural_Person_On_Repository_When_Receive_Valid_Data()
@@ -46,11 +47,11 @@ namespace TreinamentoWeb.Integration.Tests.Api
 
             var client = _factory.CreateClient();
 
-            var payload = new NaturalPerson
+            var payload = new LegalPerson
             {
                 Active = true,
                 Address = "Rua XXX",
-                CPF = "54822590054",
+                CNPJ = "96764618000105",
                 Email = "fulano@terra.com.br",
                 Name = "Fulano da Silva"
             };
@@ -59,7 +60,7 @@ namespace TreinamentoWeb.Integration.Tests.Api
 
             #region Act
 
-            var responseMessage = await client.PostAsJsonAsync("api/NaturalPerson/", payload);
+            var responseMessage = await client.PostAsJsonAsync("api/LegalPerson/", payload);
 
             #endregion Act
 
@@ -81,11 +82,11 @@ namespace TreinamentoWeb.Integration.Tests.Api
 
             var client = _factory.CreateClient();
 
-            var payload = new NaturalPerson
+            var payload = new LegalPerson
             {
                 Active = true,
                 Address = "Rua XXX",
-                CPF = "77522810000",
+                CNPJ = "96874672000103",
                 Email = "fulano@terra.com.br",
                 Name = "Fulano da Silva"
             };
@@ -96,7 +97,7 @@ namespace TreinamentoWeb.Integration.Tests.Api
 
             #region Act
 
-            var responseMessage = await client.GetAsync("api/NaturalPerson/");
+            var responseMessage = await client.GetAsync("api/LegalPerson/");
 
             #endregion Act
 
@@ -106,15 +107,16 @@ namespace TreinamentoWeb.Integration.Tests.Api
 
             var jsonResult = await responseMessage.Content.ReadAsStringAsync();
 
-            var naturalPersonList = JsonSerializer.Deserialize<IEnumerable<NaturalPerson>>(jsonResult, new JsonSerializerOptions
+            var legalPersonList = JsonSerializer.Deserialize<IEnumerable<LegalPerson>>(jsonResult, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
 
-            Assert.NotEmpty(naturalPersonList);
-            Assert.Contains(naturalPersonList, o => o.CPF == payload.CPF);
+            Assert.NotEmpty(legalPersonList);
+            Assert.Contains(legalPersonList, o => o.CNPJ == payload.CNPJ);
 
             #endregion Assert
         }
+
     }
 }
